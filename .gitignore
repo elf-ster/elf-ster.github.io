@@ -1,0 +1,5 @@
+# Plain-text passphrases and messages. Never commit this.
+messages.json
+
+.venv/
+__pycache__/
