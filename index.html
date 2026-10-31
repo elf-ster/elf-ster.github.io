@@ -254,21 +254,25 @@
   .tree .bulb { color: var(--red); text-shadow: 0 0 8px var(--red); }
   .tree .trunk { color: #b5793c; text-shadow: none; }
 
-  form {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
+  form { position: relative; }
 
   label { display: block; margin-bottom: 1.3em; text-align: center; }
 
-  .prompt { flex: none; color: var(--red); text-shadow: 0 0 6px rgba(255, 59, 59, .6); }
+  /* Sits over the textarea's first line, so wrapped text continues below it */
+  .prompt {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    color: var(--red);
+    text-shadow: 0 0 6px rgba(255, 59, 59, .6);
+  }
 
   textarea {
     display: block;
-    flex: 1;
-    min-width: 0;
+    width: 100%;
     padding: 0;
+    text-indent: 22ch; /* The prompt's 21 characters plus a space */
     overflow: hidden;
     resize: none;
     border: 0;
@@ -576,7 +580,7 @@
       output.className = "denied";
       output.textContent =
         attempts > 1 && passphrase === "camila"
-          ? "🚨 🚨 🚨 Pinche perro metiche 🚨 🚨 🚨"
+          ? "🚨 🚨 🚨 \nPinche perro metiche\n 🚨 🚨 🚨"
           : "Jojojo, esa no es la contraseña. Inténtalo de nuevo.";
       input.disabled = false;
       input.focus();
